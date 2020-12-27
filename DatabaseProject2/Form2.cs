@@ -20,7 +20,7 @@ namespace DatabaseProject2
         private void Form2_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'projectDataSet.Customer' table. You can move, or remove it, as needed.
-            this.customerTableAdapter.Fill(this.projectDataSet.Customer);
+            
 
         }
     }
