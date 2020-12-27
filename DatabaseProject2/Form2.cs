@@ -13,8 +13,7 @@ namespace DatabaseProject2
 {
     public partial class Form2 : Form
     {
-        string connectionString = "Data Source = DESKTOP - 3JOG73P;Initial Catalog = Project;" + "Integrated Security = True";
-
+        static int ID = 0;
         public Form2()
         {
             InitializeComponent();
@@ -29,24 +28,28 @@ namespace DatabaseProject2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string fname, mname, lname, username, phone, password;
-            fname = textBox1.Text;mname = textBox2.Text;lname = textBox3.Text;
-            username = textBox4.Text; phone = textBox5.Text; password = textBox6.Text;
+            
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    SqlCommand command = new SqlCommand($"insert into customer " +
-                        "(cust_fname,cust_mname,cust_lname,cust_username,cust_phone,cust_password)" +
-                        "values('" + fname + "','" + mname + "','" + lname + "','" + username + "','" + phone + "','" + password + "')", connection);
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    connection.Close();
-                }
+                string connectionString = "Data Source = DESKTOP-3JOG73P;Initial Catalog = Project;Integrated Security = True";
+                string fname, mname, lname, username, phone, password;
+                fname = textBox1.Text; mname = textBox2.Text; lname = textBox3.Text;
+                username = textBox4.Text; phone = textBox5.Text; password = textBox6.Text;
+                ID++;
+                SqlConnection connection = new SqlConnection(connectionString);
+
+                SqlCommand command = new SqlCommand($"insert into customer " +
+                    "(cust_fname,cust_mname,cust_lname,cust_username,cust_phone,cust_password,customerID)" +
+                    "values('" + fname + "','" + mname + "','" + lname + "','" + username + "','" + phone + "','" + password + "','" + ID + "')", connection);
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+                this.Close();
             }
             catch (Exception)
             {
                 MessageBox.Show("Process failed sucessfuly ");
+                this.Close();
             }
            
            
