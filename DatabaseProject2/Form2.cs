@@ -13,7 +13,7 @@ namespace DatabaseProject2
 {
     public partial class Form2 : Form
     {
-        static int ID = 0;
+        
         public Form2()
         {
             InitializeComponent();
@@ -36,16 +36,20 @@ namespace DatabaseProject2
                 int password,phone;
                 fname = textBox1.Text; mname = textBox2.Text; lname = textBox3.Text;
                 username = textBox4.Text; phone = int.Parse(textBox5.Text); password =int.Parse(textBox6.Text);
+                int reenteredpassword = int.Parse(textBox7.Text);
                 
                 SqlConnection connection = new SqlConnection(connectionString);
-
-                SqlCommand command = new SqlCommand($"insert into customer " +
-                    "(cust_fname,cust_mname,cust_lname,cust_username,cust_phone,cust_password)" +
-                    "values('" + fname + "','" + mname + "','" + lname + "','" + username + "','" + phone + "','" + password + "')", connection);
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
-                this.Close();
+                if (password == reenteredpassword)
+                {
+                    SqlCommand command = new SqlCommand($"insert into customer " +
+                  "(cust_fname,cust_mname,cust_lname,cust_username,cust_phone,cust_password)" +
+                  "values('" + fname + "','" + mname + "','" + lname + "','" + username + "','" + phone + "','" + password + "')", connection);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                    this.Close();
+                }
+              
             }
             catch (Exception)
             {
